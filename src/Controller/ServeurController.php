@@ -18,3 +18,15 @@ class ServeurController extends AbstractController
         ]);
     }
 }
+
+{
+    /**
+     * @Route("/serveur", name="serveur")
+     */
+    public function index(): Response
+    {
+        return $this->render('serveur/login.html.twig', [
+            'controller_name' => 'ServeurController',
+        ]);
+    }
+}
