@@ -17,13 +17,12 @@ class ServeurController extends AbstractController
             'controller_name' => 'ServeurController',
         ]);
     }
-}
 
-{
+
     /**
-     * @Route("/serveur", name="serveur")
+     * @Route("/login", name="login")
      */
-    public function index(): Response
+    public function login(): Response
     {
         return $this->render('serveur/login.html.twig', [
             'controller_name' => 'ServeurController',
