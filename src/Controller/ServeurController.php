@@ -22,10 +22,26 @@ class ServeurController extends AbstractController
     /**
      * @Route("/login", name="login")
      */
-    public function login(): Response
+    public function login(Request $request): Response
     {
+        $nom = $request->request->get ("nom")
+        
+
+
+
+        
+        if ($nom=="nom"){
+            $sinin = "Entrer";
+        }
+        else{
+              $sinin = "Incorrect";
+        }
+
         return $this->render('serveur/login.html.twig', [
             'controller_name' => 'ServeurController',
+            'nom' =>$nom,
+            'sinin' =>$sinin,
         ]);
+
     }
 }
