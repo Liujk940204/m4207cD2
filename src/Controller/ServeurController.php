@@ -11,7 +11,7 @@ class ServeurController extends AbstractController
     /**
      * @Route("/serveur", name="serveur")
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         return $this->render('serveur/index.html.twig', [
             'controller_name' => 'ServeurController',
@@ -25,22 +25,14 @@ class ServeurController extends AbstractController
     public function login(Request $request): Response
     {
         $nom = $request->request->get ("nom")
-        
-
-
-
-        
-        if ($nom=="nom"){
-            $sinin = "Entrer";
-        }
-        else{
-              $sinin = "Incorrect";
-        }
+        $password = $request->request->get ("password")
+        $email = $request->request->get ("email")
 
         return $this->render('serveur/login.html.twig', [
             'controller_name' => 'ServeurController',
             'nom' =>$nom,
-            'sinin' =>$sinin,
+            'password'=> $password,
+            'email' =>$email,
         ]);
 
     }
