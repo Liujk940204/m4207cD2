@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,15 +25,15 @@ class ServeurController extends AbstractController
      */
     public function login(Request $request): Response
     {
-        $nom = $request->request->get ("nom")
-        $password = $request->request->get ("password")
-        $email = $request->request->get ("email")
+        $nom=$request->request->get ("root")
+        $password=$request->request->get ("root")
+        
 
         return $this->render('serveur/login.html.twig', [
             'controller_name' => 'ServeurController',
             'nom' =>$nom,
             'password'=> $password,
-            'email' =>$email,
+            
         ]);
 
     }
