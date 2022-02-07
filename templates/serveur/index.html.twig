@@ -9,14 +9,35 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Bienvenue sur mon site web</h1>
     
 
 <br />
 
 
-<button type="submit" class="btn btn-primary mb-2">Submit</button>
-</div>
+<form method="post" action="traitement.php">
+   <p>
+       <label for="nom">Votre nom :</label>
+       <input type="text" name="nom" id="nom" />
+       
+       <br />
+       <label for="password">Votre mot de passe :</label>
+       <input type="password" name="password" id="password" />
+       
+       
+   </p>
+</form>
+
+
+
+
+
+
+
+
+
+
+<button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
 
     
     

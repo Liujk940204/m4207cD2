@@ -5,37 +5,9 @@
 
 {% block body %}
 
+<p>Vous vous êtes connecté avec succès
+</p>
 
 
 
-
-<form method="post" action="traitement.php">
-   <p>
-       <label for="nom">Votre nom :</label>
-       <input type="text" name="nom" id="nom" />
-       
-       <br />
-       <label for="password">Votre mot de passe :</label>
-       <input type="password" name="password" id="password" />
-       
-       
-   </p>
-</form>
-
-
-
-
-
-
-
-
-<form method="post" action="traitement.php">
-   <p>
-       <label for="ameliorer">Comment pensez-vous que je pourrais améliorer mon site ?</label><br />
-       <textarea name="ameliorer" id="ameliorer"></textarea>
-   </p>
-</form>
-
-<button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-
-<br />
+{% endblock %}
