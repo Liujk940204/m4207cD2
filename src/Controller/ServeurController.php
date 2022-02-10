@@ -61,6 +61,36 @@ class ServeurController extends AbstractController
 
         ]);
     }
+ 
 
+    /**
+     * @Route("/utilisateur", name="utilisateur")
+     */
+    public function utilisateur(Request $request,EntityManagerInterface $manager): Response
+    {
+        $newlogin=$request->request->get("newlogin");
+        $newpassword=$request->request->get("newpassword1");
+        $utilisateur= new Utilisateur();
+        $utilisateur->setlogin($newlogin);
+        $utilisateur->setpassword($newpassword);
+        $manager -> persist($utilisateur);
+        $manager ->flush();
+        return $this->redirectToRoute ('show');
+
+}
+   /**
+     * @Route("/show", name="show")
+     */
+    public function show(): Response
+    {
+        
+        return $this->render('serveur/show.html.twig', [
+            'controller_name' => 'ServeurController',
+        ]);
+
+        
+    } 
+
+  
 
 }
