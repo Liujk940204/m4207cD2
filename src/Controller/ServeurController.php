@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-
+use App\Entity\Utilisateur;
 use App\Entity\NomClasseTable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,8 +53,16 @@ class ServeurController extends AbstractController
         */
         public function login(Request $request,EntityManagerInterface $manager): Response
     {   
+        $nom=$request->request->get ("admin");
         $reponse = $manager -> getRepository(NomClasseTable :: class) -> findOneBy([ 'nomChamp' => 'admin']);
         $reponse -> getChamp();
+        
+        if($nom=$request->request->get ("admin")){
+            $contenu = "admin";
+           }
+           else{
+            $contenu = "non valide";
+           }
         
         return $this->render('serveur/login.html.twig', [
             
@@ -70,11 +78,13 @@ class ServeurController extends AbstractController
     {
         $newlogin=$request->request->get("newlogin");
         $newpassword=$request->request->get("newpassword1");
-        $utilisateur= new Utilisateur();
-        $utilisateur->setlogin($newlogin);
-        $utilisateur->setpassword($newpassword);
-        $manager -> persist($utilisateur);
+        $monutilisateur= new Utilisateur();
+        $monutilisateur->setlogin($newlogin);
+        $monutilisateur->setpassword($newpassword);
+        $manager -> persist($monutilisateur);
         $manager ->flush();
+        
+        
         return $this->redirectToRoute ('show');
 
 }
@@ -84,13 +94,24 @@ class ServeurController extends AbstractController
     public function show(): Response
     {
         
-        return $this->render('serveur/show.html.twig', [
-            'controller_name' => 'ServeurController',
+        return $this->render('serveur/login.html.twig', [
+            
+
         ]);
 
         
     } 
 
-  
+     
+    
+
+    /**
+     * @Route("/liste_utilisateurs", name="liste_utilisateurs")
+     */
+    public function liste_utilisateurs(): Response
+    {   
+        
+        return $this->render('serveur/liste_utilisateurs.html.twig',['lst_utilisateurs' => $mesUtilisateurs]);
+    }
 
 }

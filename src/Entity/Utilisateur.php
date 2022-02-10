@@ -29,6 +29,11 @@ class Utilisateur
      */
     private $acces;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Password;
+
     public function __construct()
     {
         $this->acces = new ArrayCollection();
@@ -77,6 +82,18 @@ class Utilisateur
                 $acce->setUtil(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->Password;
+    }
+
+    public function setPassword(string $Password): self
+    {
+        $this->Password = $Password;
 
         return $this;
     }
