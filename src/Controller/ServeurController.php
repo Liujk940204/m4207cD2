@@ -54,8 +54,8 @@ class ServeurController extends AbstractController
         public function login(Request $request,EntityManagerInterface $manager): Response
     {   
         $nom=$request->request->get ("admin");
-        $reponse = $manager -> getRepository(NomClasseTable :: class) -> findOneBy([ 'nomChamp' => 'admin']);
-        $reponse -> getChamp();
+        //$reponse = $manager -> getRepository( login.html.twig :: class) -> findOneBy([ utilisateur.html.twig => 'admin']);
+        //$reponse -> getChamp();
         
         if($nom=$request->request->get ("admin")){
             $contenu = "admin";
@@ -65,7 +65,7 @@ class ServeurController extends AbstractController
            }
         
         return $this->render('serveur/login.html.twig', [
-            
+            'contenu'=>'xxx'
 
         ]);
     }
@@ -113,5 +113,23 @@ class ServeurController extends AbstractController
         
         return $this->render('serveur/liste_utilisateurs.html.twig',['lst_utilisateurs' => $mesUtilisateurs]);
     }
+
+
+
+   
+    /**
+    * @Route("/supprimer_utilisateur/{id}",name="supprimer_utilisateur")
+    */
+    public function supprimer_utilisateur(EntityManagerInterface $manager,Utilisateur $editutil): Response {  
+    $manager->remove($editutil);
+    $manager->flush();
+    // Affiche de nouveau la liste des utilisateurs
+    return $this->redirectToRoute ('liste_utilisateurs');
+ }
+  
+    
+ 
+ 
+
 
 }
