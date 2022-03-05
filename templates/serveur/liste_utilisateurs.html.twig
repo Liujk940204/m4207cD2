@@ -1,5 +1,19 @@
-{% for un_utilisateur in lst_utilisateurs %}
 
- {{ un_utilisateur.Nom }}
 
-{% endfor %}
+ 
+
+<table border="1">
+    <tr>
+        <th>Utilisateur</th>
+        <th>Password</th>
+    </tr>
+    {% for user in liste_utilisateurs %} 
+    <tr>
+        <td>{{user.login}}</td>
+        <td>{{user.password}}</td>
+    </tr>
+    
+    {% endfor %}
+   
+</table>
+

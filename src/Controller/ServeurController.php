@@ -26,110 +26,70 @@ class ServeurController extends AbstractController
 
 
     /**
-     * @Route("/valide", name="valide")
-     */
-    public function valide(Request $request): Response
-    {
-        $nom=$request->request->get ("admin");
-        $password=$request->request->get ("password");
-        
-        
-          if($password == "password" && $nom == "admin"){
-            $contenu = "valide";
-           }
-           else{
-            $contenu = "non valide";
-           }
-        
-        
-        return $this->render('serveur/valide.html.twig', [
-            'admin' =>$nom,
-            'contenu' => $contenu,
-        ]);
-    }
-
-    /**
-        * @Route("/login", name="login")
+        * @Route("/valide", name="valide")
         */
-        public function login(Request $request,EntityManagerInterface $manager): Response
+        public function valide(Request $request,EntityManagerInterface $manager): Response
     {   
         $nom=$request->request->get ("admin");
-        //$reponse = $manager -> getRepository( login.html.twig :: class) -> findOneBy([ utilisateur.html.twig => 'admin']);
-        //$reponse -> getChamp();
+        $password=$request->request->get ("password");
+        $reponse = $manager -> getRepository( Utilisateur :: class) -> findOneBy([ login => 'admin']);
         
-        if($nom=$request->request->get ("admin")){
-            $contenu = "admin";
-           }
-           else{
+        
+        if($response == NULL){
             $contenu = "non valide";
+        }
+        else
+        ($response -> getpassword() == "password" ){
+            $contenu = "valide" ;
            }
         
-        return $this->render('serveur/login.html.twig', [
-            'contenu'=>'xxx'
+        return $this-> render('serveur/valide.html.twig', [
+            'contenu' => $contenu 
 
         ]);
     }
  
 
-    /**
-     * @Route("/utilisateur", name="utilisateur")
+  /**
+     * @Route("/inscription", name="inscription")
      */
-    public function utilisateur(Request $request,EntityManagerInterface $manager): Response
+    public function inscription(Request $request,EntityManagerInterface $manager): Response
     {
-        $newlogin=$request->request->get("newlogin");
-        $newpassword=$request->request->get("newpassword1");
+        $newlogin=$request->request->get("admin");
+        $newpassword=$request->request->get("password");
         $monutilisateur= new Utilisateur();
         $monutilisateur->setlogin($newlogin);
         $monutilisateur->setpassword($newpassword);
         $manager -> persist($monutilisateur);
-        $manager ->flush();
+        $manager ->flush(); 
         
+        return $this->redirectToRoute ('serveur');
         
-        return $this->redirectToRoute ('show');
-
-}
-   /**
-     * @Route("/show", name="show")
+    }
+ 
+     
+    /**
+     * @Route("/réel", name="réel")
      */
-    public function show(): Response
+    public function réel(Request $request,EntityManagerInterface $manager): Response
     {
         
-        return $this->render('serveur/login.html.twig', [
-            
-
-        ]);
-
         
-    } 
-
-     
-    
+        return $this->render('serveur/inscrption.html.twig');
+    }
 
     /**
      * @Route("/liste_utilisateurs", name="liste_utilisateurs")
      */
-    public function liste_utilisateurs(): Response
-    {   
+    public function liste_utilisateurs(Request $request,EntityManagerInterface $manager): Response
+    {
+        $liste_utilisateurs=$manager->getRepository(Utilisateur::class)->findAll();
         
-        return $this->render('serveur/liste_utilisateurs.html.twig',['lst_utilisateurs' => $mesUtilisateurs]);
+        return $this->render('serveur/liste_utilisateurs.html.twig',[
+           'liste_utilisateurs' => $liste_utilisateurs
+    ]);
     }
 
-
-
-   
-    /**
-    * @Route("/supprimer_utilisateur/{id}",name="supprimer_utilisateur")
-    */
-    public function supprimer_utilisateur(EntityManagerInterface $manager,Utilisateur $editutil): Response {  
-    $manager->remove($editutil);
-    $manager->flush();
-    // Affiche de nouveau la liste des utilisateurs
-    return $this->redirectToRoute ('liste_utilisateurs');
- }
-  
-    
- 
- 
 
 
 }
